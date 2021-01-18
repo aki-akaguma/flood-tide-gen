@@ -2,6 +2,8 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+* add support trait HelpVersion
+
 0.1.0 (2021-01-17)
 =====
 first commit

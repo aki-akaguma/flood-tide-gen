@@ -280,6 +280,8 @@ pub struct CmdOptConf {
     pub opt_program: String,
     //
 "#;
+    let mut have_help: bool = false;
+    let mut have_version: bool = false;
     for rec in vec_optstr.iter() {
         let v_type = if rec.is_vec {
             format!("Vec<{}>", rec.meta_type.as_str())
@@ -287,9 +289,45 @@ pub struct CmdOptConf {
             format!("{}", rec.meta_type.as_str())
         };
         sss += &format!("    pub {}: {},\n", rec.field_s, v_type);
+        if rec.enum_s == "Help" {
+            have_help = true;
+        }
+        if rec.enum_s == "Version" {
+            have_version = true;
+        }
     }
     sss += r#"    //
     pub arg_params: Vec<String>,
+}
+"#;
+    sss += r#"
+impl flood_tide::HelpVersion for CmdOptConf {
+    fn is_help(&self) -> bool {
+"#;
+    if have_help {
+        sss += r#"
+        self.flg_help
+"#;
+    } else {
+        sss += r#"
+        false
+"#;
+    }
+    sss += r#"
+    }
+    fn is_version(&self) -> bool {
+"#;
+    if have_version {
+        sss += r#"
+        self.flg_version
+"#;
+    } else {
+        sss += r#"
+        false
+"#;
+    }
+    sss += r#"
+    }
 }
 "#;
     //
