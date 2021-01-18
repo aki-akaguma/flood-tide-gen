@@ -568,19 +568,7 @@ match CmdOP::from(nv.opt.num) {
     for rec in vec_optstr.iter() {
         sss += &format!("    CmdOP::{} => {{\n", rec.enum_s);
         let s = match rec.meta_type {
-            MetaType::Bool => match rec.enum_s.as_str() {
-                "Help" => {
-                    sss += "        print_help_and_exit(conf);\n";
-                    ""
-                }
-                "Version" => {
-                    sss += "        print_version_and_exit(conf);\n";
-                    ""
-                }
-                _ => {
-                    "true"
-                }
-            },
+            MetaType::Bool => "true",
             MetaType::String => "value_to_string(nv)?",
             MetaType::I8 => "value_to_i8(nv)?",
             MetaType::I16 => "value_to_i16(nv)?",
