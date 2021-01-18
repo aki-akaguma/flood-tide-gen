@@ -302,29 +302,23 @@ pub struct CmdOptConf {
 "#;
     sss += r#"
 impl flood_tide::HelpVersion for CmdOptConf {
-    fn is_help(&self) -> bool {
-"#;
+    fn is_help(&self) -> bool {"#;
     if have_help {
         sss += r#"
-        self.flg_help
-"#;
+        self.flg_help"#;
     } else {
         sss += r#"
-        false
-"#;
+        false"#;
     }
     sss += r#"
     }
-    fn is_version(&self) -> bool {
-"#;
+    fn is_version(&self) -> bool {"#;
     if have_version {
         sss += r#"
-        self.flg_version
-"#;
+        self.flg_version"#;
     } else {
         sss += r#"
-        false
-"#;
+        false"#;
     }
     sss += r#"
     }
