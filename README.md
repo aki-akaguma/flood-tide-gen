@@ -12,3 +12,8 @@
 
 - [ ] adding test codes
 - [ ] other define format support  (like yaml,json)
+
+## Supports
+
+- [flood-tide](https://crates.io/crates/flood-tide) - command option parsing
+- [aki-gsub](https://crates.io/crates/aki-gsub) - the sample used *flood-tide*

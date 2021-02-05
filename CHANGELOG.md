@@ -2,7 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.1 (2021-02-05)
+=====
+
 * add support trait HelpVersion
+* modify README.md
 
 0.1.0 (2021-01-17)
 =====
