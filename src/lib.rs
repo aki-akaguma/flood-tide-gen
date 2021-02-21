@@ -232,19 +232,19 @@ const OPTIONS_TEXT: &str = r""#;
     sss += r#"
 #[repr(u8)]
 #[derive(Debug, PartialEq)]
-enum CmdOP {
+enum CmdOp {
 "#;
     for rec in vec_optstr.iter() {
         sss += &format!("    {},\n", rec.enum_s);
     }
     sss += "}\n";
     sss += r#"
-impl std::convert::From<u8> for CmdOP {
+impl std::convert::From<u8> for CmdOp {
     fn from(value: u8) -> Self {
         unsafe { std::mem::transmute(value) }
     }
 }
-impl CmdOP {
+impl CmdOp {
     pub const fn to(self) -> OptNum {
         self as OptNum
     }
@@ -289,7 +289,7 @@ const OPT_ARY: [Opt;"#;
         } else {
             "has: Arg::Yes, "
         };
-        sss += &format!("num: CmdOP::{}.to(), ", rec.enum_s);
+        sss += &format!("num: CmdOp::{}.to(), ", rec.enum_s);
         sss += "},\n";
     }
     sss += "];\n";
@@ -326,7 +326,7 @@ const OPT_ARY_SHO_IDX: [(u8,usize);"#;
     sss += r#"
 #[derive(Debug, Default, PartialEq)]
 pub struct CmdOptConf {
-    pub opt_program: String,
+    pub prog_name: String,
     //
 "#;
     let mut have_help: bool = false;
@@ -615,10 +615,10 @@ pub fn gen_src_match(vec_optstr: &[OptStr]) -> anyhow::Result<String> {
     sss += &format!("{} {}", s, env!("CARGO_PKG_NAME"));
     //
     sss += r#"
-match CmdOP::from(nv.opt.num) {
+match CmdOp::from(nv.opt.num) {
 "#;
     for rec in vec_optstr.iter() {
-        sss += &format!("    CmdOP::{} => {{\n", rec.enum_s);
+        sss += &format!("    CmdOp::{} => {{\n", rec.enum_s);
         let s = match rec.meta_type {
             MetaType::Bool => "true",
             MetaType::String => "value_to_string(nv)?",
