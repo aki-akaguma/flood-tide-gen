@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.4 (2021-02-27)
+=====
+
+* add support some "ptions:" line in cmd.txt
+
 0.1.3 (2021-02-21)
 =====
 

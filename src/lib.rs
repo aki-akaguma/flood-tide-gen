@@ -122,7 +122,7 @@ pub fn parse_input_file(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<Strin
     );
     for line in reader.lines() {
         let line = line?;
-        if line.is_empty() || line == "Options:" {
+        if line.is_empty() || line.ends_with("ptions:") {
             // nothing todo
         } else if let Some(caps) = re_1.captures(&line) {
             //  -C, --continue-at <offset>        Resumed transfer offset
