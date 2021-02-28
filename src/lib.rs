@@ -3,6 +3,7 @@ use std::io::BufRead;
 use std::io::Read;
 use std::io::Write;
 use std::cmp::Ordering;
+use case::CaseExt;
 
 pub fn update_file(sss: &String, file_path: &str) -> anyhow::Result<()> {
     let contents = {
@@ -68,34 +69,36 @@ impl OptStr {
 }
 
 #[rustfmt::skip]
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum MetaType {
-    Bool = 0, String,
+    Bool, String,
     I8, I16, I32, I64, I128,
     U8, U16, U32, U64, U128,
     Isize, Usize,
     F32, F64,
+    Other(String),
 }
 
 impl MetaType {
-    pub fn as_str(&self) -> &str {
+    pub fn as_type_string(&self) -> String {
         match self {
-            MetaType::Bool => "bool",
-            MetaType::String => "String",
-            MetaType::I8 => "i8",
-            MetaType::I16 => "i16",
-            MetaType::I32 => "i32",
-            MetaType::I64 => "i64",
-            MetaType::I128 => "i128",
-            MetaType::U8 => "u8",
-            MetaType::U16 => "u16",
-            MetaType::U32 => "u32",
-            MetaType::U64 => "u64",
-            MetaType::U128 => "u128",
-            MetaType::Isize => "isize",
-            MetaType::Usize => "usize",
-            MetaType::F32 => "f32",
-            MetaType::F64 => "f64",
+            MetaType::Bool => "bool".to_string(),
+            MetaType::String => "String".to_string(),
+            MetaType::I8 => "i8".to_string(),
+            MetaType::I16 => "i16".to_string(),
+            MetaType::I32 => "i32".to_string(),
+            MetaType::I64 => "i64".to_string(),
+            MetaType::I128 => "i128".to_string(),
+            MetaType::U8 => "u8".to_string(),
+            MetaType::U16 => "u16".to_string(),
+            MetaType::U32 => "u32".to_string(),
+            MetaType::U64 => "u64".to_string(),
+            MetaType::U128 => "u128".to_string(),
+            MetaType::Isize => "isize".to_string(),
+            MetaType::Usize => "usize".to_string(),
+            MetaType::F32 => "f32".to_string(),
+            MetaType::F64 => "f64".to_string(),
+            MetaType::Other(s) => s.to_camel(),
         }
     }
 }
@@ -333,9 +336,9 @@ pub struct CmdOptConf {
     let mut have_version: bool = false;
     for rec in vec_optstr.iter() {
         let v_type = if rec.is_vec {
-            format!("Vec<{}>", rec.meta_type.as_str())
+            format!("Vec<{}>", rec.meta_type.as_type_string())
         } else {
-            format!("{}", rec.meta_type.as_str())
+            format!("{}", rec.meta_type.as_type_string())
         };
         sss += &format!("    pub {}: {},\n", rec.field_s, v_type);
         if rec.enum_s == "Help" {
@@ -380,10 +383,10 @@ impl flood_tide::HelpVersion for CmdOptConf {
     if !out_flags.value_to {
         sss += "/*\n";
     }
-    let mut vec_mt: Vec<MetaType> = Vec::new();
+    let mut vec_mt: Vec<&MetaType> = Vec::new();
     for rec in vec_optstr.iter() {
-        let mt = rec.meta_type;
-        if mt == MetaType::Bool {
+        let mt = &rec.meta_type;
+        if let MetaType::Bool = mt {
             continue
         }
         if ! vec_mt.contains(&mt) {
@@ -598,6 +601,7 @@ fn value_to_f64(nv: &NameVal<'_>) -> Result<f64, OptParseError> {
     }
 }
 "#,
+            MetaType::Other(_string) => r#""#,
         };
         sss += s;
     };
@@ -619,23 +623,24 @@ match CmdOp::from(nv.opt.num) {
 "#;
     for rec in vec_optstr.iter() {
         sss += &format!("    CmdOp::{} => {{\n", rec.enum_s);
-        let s = match rec.meta_type {
-            MetaType::Bool => "true",
-            MetaType::String => "value_to_string(nv)?",
-            MetaType::I8 => "value_to_i8(nv)?",
-            MetaType::I16 => "value_to_i16(nv)?",
-            MetaType::I32 => "value_to_i32(nv)?",
-            MetaType::I64 => "value_to_i64(nv)?",
-            MetaType::I128 => "value_to_i128(nv)?",
-            MetaType::U8 => "value_to_u8(nv)?",
-            MetaType::U16 => "value_to_u16(nv)?",
-            MetaType::U32 => "value_to_u32(nv)?",
-            MetaType::U64 => "value_to_u64(nv)?",
-            MetaType::U128 => "value_to_u128(nv)?",
-            MetaType::Isize => "value_to_isize(nv)?",
-            MetaType::Usize => "value_to_usize(nv)?",
-            MetaType::F32 => "value_to_f32(nv)?",
-            MetaType::F64 => "value_to_f64(nv)?",
+        let s = match &rec.meta_type {
+            MetaType::Bool => "true".to_string(),
+            MetaType::String => "value_to_string(nv)?".to_string(),
+            MetaType::I8 => "value_to_i8(nv)?".to_string(),
+            MetaType::I16 => "value_to_i16(nv)?".to_string(),
+            MetaType::I32 => "value_to_i32(nv)?".to_string(),
+            MetaType::I64 => "value_to_i64(nv)?".to_string(),
+            MetaType::I128 => "value_to_i128(nv)?".to_string(),
+            MetaType::U8 => "value_to_u8(nv)?".to_string(),
+            MetaType::U16 => "value_to_u16(nv)?".to_string(),
+            MetaType::U32 => "value_to_u32(nv)?".to_string(),
+            MetaType::U64 => "value_to_u64(nv)?".to_string(),
+            MetaType::U128 => "value_to_u128(nv)?".to_string(),
+            MetaType::Isize => "value_to_isize(nv)?".to_string(),
+            MetaType::Usize => "value_to_usize(nv)?".to_string(),
+            MetaType::F32 => "value_to_f32(nv)?".to_string(),
+            MetaType::F64 => "value_to_f64(nv)?".to_string(),
+            MetaType::Other(string) => format!("value_to_{}(nv)?", string),
         };
         if !s.is_empty() {
             if rec.is_vec {

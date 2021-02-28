@@ -2,6 +2,12 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.5 (2021-02-28)
+=====
+
+* add MetaType::Other(String)
+* change MetaType.as_str() to MetaType.as_type_string()
+
 0.1.4 (2021-02-27)
 =====
 
