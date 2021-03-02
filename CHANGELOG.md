@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.6 (2021-03-02)
+=====
+
+* add OptStr::is_opt for supporting Option<T> field.
+
 0.1.5 (2021-02-28)
 =====
 

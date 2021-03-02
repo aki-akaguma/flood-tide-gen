@@ -35,6 +35,7 @@ pub struct OptStr {
     //
     pub meta_type: MetaType,    // meta's type
     pub is_vec: bool,           // Vec<meta type>
+    pub is_opt: bool,           // Option<meta type>
     pub enum_s: String,         // enume field string
     pub field_s: String,        // struct field string
 }
@@ -336,9 +337,17 @@ pub struct CmdOptConf {
     let mut have_version: bool = false;
     for rec in vec_optstr.iter() {
         let v_type = if rec.is_vec {
-            format!("Vec<{}>", rec.meta_type.as_type_string())
+            if rec.is_opt {
+                format!("Vec<Option<{}>>", rec.meta_type.as_type_string())
+            } else {
+                format!("Vec<{}>", rec.meta_type.as_type_string())
+            }
         } else {
-            format!("{}", rec.meta_type.as_type_string())
+            if rec.is_opt {
+                format!("Option<{}>", rec.meta_type.as_type_string())
+            } else {
+                format!("{}", rec.meta_type.as_type_string())
+            }
         };
         sss += &format!("    pub {}: {},\n", rec.field_s, v_type);
         if rec.enum_s == "Help" {
@@ -644,9 +653,17 @@ match CmdOp::from(nv.opt.num) {
         };
         if !s.is_empty() {
             if rec.is_vec {
-                sss += &format!("        conf.{}.push({});\n", rec.field_s, s);
+                if rec.is_opt {
+                    sss += &format!("        conf.{}.push(Some({}));\n", rec.field_s, s);
+                } else {
+                    sss += &format!("        conf.{}.push({});\n", rec.field_s, s);
+                }
             } else {
-                sss += &format!("        conf.{} = {};\n", rec.field_s, s);
+                if rec.is_opt {
+                    sss += &format!("        conf.{} = Some({});\n", rec.field_s, s);
+                } else {
+                    sss += &format!("        conf.{} = {};\n", rec.field_s, s);
+                }
             }
         }
         sss += "    }\n";
