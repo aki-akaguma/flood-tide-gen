@@ -2,6 +2,13 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.7 (2021-04-03)
+=====
+
+* add cmd_opt_conf_has_subcmd and subcmd_opt_conf into SrcHelpFlags
+* change param type: fn update_file(sss: &str, file_path: &str)
+* update depends
+
 0.1.6 (2021-03-02)
 =====
 
