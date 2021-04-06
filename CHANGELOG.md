@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.8 (2021-04-06)
+=====
+
+* add support the single only option: -X <option>
+
 0.1.7 (2021-04-03)
 =====
 

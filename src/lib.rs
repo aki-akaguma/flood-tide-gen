@@ -42,28 +42,57 @@ pub struct OptStr {
 
 impl OptStr {
     fn to_enum(&self) -> String {
-        let r = &self.lon;
-        let v: Vec<_> = r
-            .split('-')
-            .map(|w| {
-                let mut cs: Vec<char> = w.chars().collect();
-                cs[0] = cs[0].to_ascii_uppercase();
-                let mut s = String::new();
-                for c in cs {
-                    s.push(if c == '.' { '_' } else { c });
+        if !self.lon.is_empty() {
+            let r = &self.lon;
+            let v: Vec<_> = r
+                .split('-')
+                .map(|w| {
+                    let mut cs: Vec<char> = w.chars().collect();
+                    cs[0] = cs[0].to_ascii_uppercase();
+                    let mut s = String::new();
+                    for c in cs {
+                        s.push(if c == '.' { '_' } else { c });
+                    }
+                    s
+                })
+                .collect();
+            v.join("")
+        } else {
+            if let Some(c) = self.sho.chars().next() {
+                if c.is_ascii_lowercase() {
+                    "Lc".to_string() + &self.sho.to_uppercase()
+                } else if c.is_ascii_uppercase() {
+                    "Uc".to_string() + &self.sho
+                } else {
+                    "Cc".to_string() + &self.sho.to_uppercase()
                 }
-                s
-            })
-            .collect();
-        v.join("")
+            } else {
+                "".to_string()
+            }
+        }
     }
     fn to_field(&self) -> String {
-        let mut s = String::with_capacity(self.lon.len());
-        for c in self.lon.chars() {
-            #[rustfmt::skip]
-            let c = match c { '-' => '_', '.' => '_', _ => c, };
-            s.push(c);
-        }
+        let s = if !self.lon.is_empty() {
+            let mut s = String::with_capacity(self.lon.len());
+            for c in self.lon.chars() {
+                #[rustfmt::skip]
+                let c = match c { '-' => '_', '.' => '_', _ => c, };
+                s.push(c);
+            }
+            s
+        } else {
+            if let Some(c) = self.sho.chars().next() {
+                if c.is_ascii_lowercase() {
+                    "lc_".to_string() + &self.sho
+                } else if c.is_ascii_uppercase() {
+                    "uc_".to_string() + &self.sho.to_lowercase()
+                } else {
+                    "cc_".to_string() + &self.sho
+                }
+            } else {
+                "".to_string()
+            }
+        };
         let prefix = if self.meta.is_empty() { "flg_" } else { "opt_" };
         prefix.to_string() + &s
     }
@@ -118,6 +147,8 @@ pub fn parse_input_file(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<Strin
     let re_2 = regex::Regex::new(r"^ *-([^ ]), +--([^ ]+) +([^ ].*)$").unwrap();
     let re_3 = regex::Regex::new(r"^ +--([^ ]+) +(<[^>]+>) +([^ ].*)$").unwrap();
     let re_4 = regex::Regex::new(r"^ +--([^ ]+) +([^ ].*)$").unwrap();
+    let re_5 = regex::Regex::new(r"^ *-([^ ]) +(<[^>]+>) +([^ ].*)$").unwrap();
+    let re_6 = regex::Regex::new(r"^ *-([^ ]) +([^ ].*)$").unwrap();
     //
     let mut v_num = 0;
     let reader = std::io::BufReader::new(
@@ -168,6 +199,28 @@ pub fn parse_input_file(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<Strin
                 num: v_num,
                 sho: "".to_string(),
                 lon: caps[1].to_string(),
+                meta: "".to_string(),
+                _comment: caps[2].to_string(),
+                ..OptStr::default()
+            });
+        } else if let Some(caps) = re_5.captures(&line) {
+            //  -C <offset>        Resumed transfer offset
+            v_num += 1;
+            vec_optstr.push(OptStr {
+                num: v_num,
+                sho: caps[1].to_string(),
+                lon: "".to_string(),
+                meta: caps[2].to_string(),
+                _comment: caps[3].to_string(),
+                ..OptStr::default()
+            });
+        } else if let Some(caps) = re_6.captures(&line) {
+            //  -q             Disable .curlrc
+            v_num += 1;
+            vec_optstr.push(OptStr {
+                num: v_num,
+                sho: caps[1].to_string(),
+                lon: "".to_string(),
                 meta: "".to_string(),
                 _comment: caps[2].to_string(),
                 ..OptStr::default()
