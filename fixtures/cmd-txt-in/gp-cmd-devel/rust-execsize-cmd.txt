@@ -1,0 +1,8 @@
+Options:
+  -f, --function            print function size
+  -d, --demangle            demangle function name
+  -a, --append-file-name    append file name to function
+  -s, --separator <sep>     output field separator
+
+  -H, --help        display this help and exit
+  -V, --version     output version information and exit

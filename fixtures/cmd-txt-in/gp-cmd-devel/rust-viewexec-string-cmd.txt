@@ -1,0 +1,7 @@
+Options:
+  -r, --radix <ODX>         display numbers in octal, decimal or hex
+      --no-escape           no escape string
+      --src-file            display source file name
+
+  -H, --help     display this help and exit
+  -V, --version  output version information and exit

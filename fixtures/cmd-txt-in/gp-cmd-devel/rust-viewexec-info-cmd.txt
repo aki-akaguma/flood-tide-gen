@@ -1,0 +1,15 @@
+Options:
+  -h, --file-header         display the file header
+  -l, --program-headers     display the program headers
+  -S, --section-headers     display the section headers
+  -s, --tbl <tbl>           display the symbol table
+      --syms                display the symbol table, '.symtab' section
+      --dyn-syms            display the dynamic symbol table, '.dynsym' section
+  -n, --notes               display core notes
+  -r, --relocs              display relocations
+  -d, --dynamic             display dynamic section
+  -v, --version-info        display version section
+  -D, --demangle            demangle function name
+
+  -H, --help        display this help and exit
+  -V, --version     display version information and exit

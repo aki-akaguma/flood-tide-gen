@@ -1,0 +1,10 @@
+Options:
+  -f, --format <ABCF>       select output style
+  -r, --radix <ODX>         display numbers in octal, decimal or hex
+  -t, --totals              display total size (berkeley only)
+  -D, --demangle            demangle function name (-fF only)
+      --src-file            display source file name (-fF only)
+      --sort <N>            sort column. N is 0,1,2,3. (-fF only)
+
+  -H, --help     display this help and exit
+  -V, --version  output version information and exit
