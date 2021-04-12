@@ -1,0 +1,9 @@
+Options:
+  -u, --update              update mode
+  -s, --symbol <symbol>     expected symbol
+  -o, --output <dir>        bi5 data into <dir>
+      --from <date>         proces from <date>
+      --to <date>           proces to <date>
+
+  -H, --help     display this help and exit
+  -V, --version  display version information and exit

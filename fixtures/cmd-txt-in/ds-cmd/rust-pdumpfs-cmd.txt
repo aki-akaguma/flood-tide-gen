@@ -1,0 +1,10 @@
+Options:
+  -v, --verbose                 verbose message
+  -q, --quiet                   quiet message
+  -d, --debug                   debug message
+  -n, --dry-run                 not realy prosess
+  -e, --exclude <expr>          regex string of exclude file name
+  -s, --limit-size <num[gmk]>   file size limit
+
+  -h, --help     display this help and exit
+  -V, --version  output version information and exit

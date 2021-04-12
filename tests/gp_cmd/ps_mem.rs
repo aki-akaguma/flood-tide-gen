@@ -14,16 +14,8 @@ fn gen_src_cmd() {
     }
     assert_eq!(r.is_ok(), true);
     //
-    compare_out_res!(
-        "ps-mem",
-        "gp-cmd/ps-mem",
-        "cmd.help.rs.txt"
-    );
-    compare_out_res!(
-        "ps-mem",
-        "gp-cmd/ps-mem",
-        "cmd.match.rs.txt"
-    );
+    compare_out_res!("ps-mem", "gp-cmd/ps-mem", "cmd.help.rs.txt");
+    compare_out_res!("ps-mem", "gp-cmd/ps-mem", "cmd.match.rs.txt");
 }
 
 //

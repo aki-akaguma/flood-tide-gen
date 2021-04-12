@@ -14,16 +14,8 @@ fn gen_src_cmd() {
     }
     assert_eq!(r.is_ok(), true);
     //
-    compare_out_res!(
-        "aki-gsub",
-        "aki-cmd/aki-gsub",
-        "cmd.help.rs.txt"
-    );
-    compare_out_res!(
-        "aki-gsub",
-        "aki-cmd/aki-gsub",
-        "cmd.match.rs.txt"
-    );
+    compare_out_res!("aki-gsub", "aki-cmd/aki-gsub", "cmd.help.rs.txt");
+    compare_out_res!("aki-gsub", "aki-cmd/aki-gsub", "cmd.match.rs.txt");
 }
 //
 use flood_tide_gen::gen_src_match;

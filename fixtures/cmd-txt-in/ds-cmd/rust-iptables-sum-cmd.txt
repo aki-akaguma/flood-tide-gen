@@ -1,0 +1,3 @@
+Options:
+  -H, --help     display this help and exit
+  -V, --version  display version information and exit

@@ -1,0 +1,9 @@
+Options:
+  -s, --symbol <symbol>         expected symbol
+  -i, --input <dir>             bi5 data in <dir>
+      --from <date>             proces from <date>
+      --to <date>               proces to <date>
+
+  -H, --help        display this help and exit
+  -V, --version     display version information and exit
+  -X <x-options>    x options. try -X help

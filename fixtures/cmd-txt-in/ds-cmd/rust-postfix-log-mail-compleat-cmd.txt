@@ -1,0 +1,18 @@
+Options:
+  --stage1 <exp>           stage1 regular expression
+  --cap-num1 <nums>        stage1 cap numbers. conma sep.
+  --stage2 <exp>           stage2 regular expression
+  --cap-num2 <nums>        stage2 cap numbers. conma sep.
+  --stage3 <exp>           stage3 regular expression
+  --cap-num3 <nums>        stage3 cap numbers. conma sep.
+  --stage4 <exp>           stage4 regular expression
+  --cap-num4 <nums>        stage4 cap numbers. conma sep.
+  --stage5 <exp>           stage5 regular expression
+  --cap-num5 <nums>        stage5 cap numbers. conma sep.
+  -n, --quiet              no output unmach lines
+  --debug                  debug print
+  --expire-minutes <m>     key expire minutes
+  --help-expression        display help exp and exit
+
+  -H, --help     display this help and exit
+  -V, --version  display version information and exit
