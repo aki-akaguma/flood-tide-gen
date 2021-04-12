@@ -1,9 +1,7 @@
 use anyhow::Context;
 use case::CaseExt;
 use std::cmp::Ordering;
-use std::io::BufRead;
-use std::io::Read;
-use std::io::Write;
+use std::io::{BufRead,Read,Write};
 
 pub fn update_file(sss: &str, file_path: &str) -> anyhow::Result<()> {
     let contents = {
@@ -57,18 +55,16 @@ impl OptStr {
                 })
                 .collect();
             v.join("")
-        } else {
-            if let Some(c) = self.sho.chars().next() {
-                if c.is_ascii_lowercase() {
-                    "Lc".to_string() + &self.sho.to_uppercase()
-                } else if c.is_ascii_uppercase() {
-                    "Uc".to_string() + &self.sho
-                } else {
-                    "Cc".to_string() + &self.sho.to_uppercase()
-                }
+        } else if let Some(c) = self.sho.chars().next() {
+            if c.is_ascii_lowercase() {
+                "Lc".to_string() + &self.sho.to_uppercase()
+            } else if c.is_ascii_uppercase() {
+                "Uc".to_string() + &self.sho
             } else {
-                "".to_string()
+                "Cc".to_string() + &self.sho.to_uppercase()
             }
+        } else {
+            "".to_string()
         }
     }
     fn to_field(&self) -> String {
@@ -80,18 +76,16 @@ impl OptStr {
                 s.push(c);
             }
             s
-        } else {
-            if let Some(c) = self.sho.chars().next() {
-                if c.is_ascii_lowercase() {
-                    "lc_".to_string() + &self.sho
-                } else if c.is_ascii_uppercase() {
-                    "uc_".to_string() + &self.sho.to_lowercase()
-                } else {
-                    "cc_".to_string() + &self.sho
-                }
+        } else if let Some(c) = self.sho.chars().next() {
+            if c.is_ascii_lowercase() {
+                "lc_".to_string() + &self.sho
+            } else if c.is_ascii_uppercase() {
+                "uc_".to_string() + &self.sho.to_lowercase()
             } else {
-                "".to_string()
+                "cc_".to_string() + &self.sho
             }
+        } else {
+            "".to_string()
         };
         let prefix = if self.meta.is_empty() { "flg_" } else { "opt_" };
         prefix.to_string() + &s
