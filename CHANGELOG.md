@@ -2,6 +2,13 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.10 (2021-04-18)
+=====
+
+* add fn do_gen_src<>() for more simple
+* many deprecated
+* refactoring source code
+
 0.1.9 (2021-04-14)
 =====
 

@@ -1,10 +1,23 @@
-use super::{GenBuffer, MetaType, OptStr, SrcHelpFlags};
+#[allow(deprecated)]
+use super::{GenBuffer, MetaType, OptStr, SrcHelpFlags, SrcHelpFlags0};
 use std::cmp::Ordering;
 
+#[allow(deprecated, dead_code)]
+#[deprecated(
+    since = "0.1.10",
+    note = "Please use the do_gen_src<F>() function instead"
+)]
 pub fn gen_src_help(
     vec_optstr: &[OptStr],
     vec_line: &[String],
     out_flags: SrcHelpFlags,
+) -> anyhow::Result<String> {
+    gen_src_help0(vec_optstr, vec_line, out_flags.into())
+}
+pub(crate) fn gen_src_help0(
+    vec_optstr: &[OptStr],
+    vec_line: &[String],
+    out_flags: SrcHelpFlags0,
 ) -> anyhow::Result<String> {
     let mut sss = GenBuffer::with_capacity(4 * 1024);
     //
@@ -154,7 +167,7 @@ const OPT_ARY_SHO_IDX: [(u8,usize);"#;
 fn gen_src_struct_cmd_opt_conf(
     sss: &mut GenBuffer,
     vec_optstr: &[OptStr],
-    out_flags: &SrcHelpFlags,
+    out_flags: &SrcHelpFlags0,
 ) {
     if !out_flags.subcmd_opt_conf {
         *sss += r#"

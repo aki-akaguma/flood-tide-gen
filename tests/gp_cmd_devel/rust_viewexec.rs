@@ -1,13 +1,16 @@
 use crate::test_helper::compare_file;
+use flood_tide_gen::{do_gen_src, FixupType, MetaType, OptStr, Pasc};
 //
 #[test]
-fn gen_src_cmd() {
+fn gen_src_cmd_parent() {
     assert!(std::fs::create_dir_all(test_out_path!("rust-viewexec")).is_ok());
     //
     let r = do_gen_src(
+        Pasc::Parent,
         test_in_path!("gp-cmd-devel/rust-viewexec-cmd.txt"),
-        test_out_path!("rust-viewexec", "cmd.help.rs.txt"),
-        test_out_path!("rust-viewexec", "cmd.match.rs.txt"),
+        Some(test_out_path!("rust-viewexec", "cmd.help.rs.txt")),
+        Some(test_out_path!("rust-viewexec", "cmd.match.rs.txt")),
+        do_fix_type,
     );
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
@@ -26,56 +29,124 @@ fn gen_src_cmd() {
     );
 }
 
-//
-use flood_tide_gen::gen_src_match;
-use flood_tide_gen::parse_input_file;
-use flood_tide_gen::update_file;
-use flood_tide_gen::{gen_src_help, SrcHelpFlags};
-use flood_tide_gen::{MetaType, OptStr};
-//
-pub fn do_gen_src(in_f: &str, out_f_help: &str, out_f_match: &str) -> anyhow::Result<()> {
-    let (mut vec_optstr, vec_line) = parse_input_file(in_f)?;
+#[test]
+fn gen_src_cmd_sc_info() {
+    assert!(std::fs::create_dir_all(test_out_path!("rust-viewexec-info")).is_ok());
     //
-    fix_type(&mut vec_optstr);
-    //
-    let sss = gen_src_help(
-        &vec_optstr,
-        &vec_line,
-        SrcHelpFlags {
-            cmd_opt_conf_has_subcmd: true,
-            ..Default::default()
-        },
-    )?;
-    update_file(&sss, out_f_help)?;
-    //
-    let sss = gen_src_match(&vec_optstr)?;
-    update_file(&sss, out_f_match)?;
-    //
-    Ok(())
-}
-//
-fn fix_type(vec_optstr: &mut [OptStr]) {
-    for v in vec_optstr {
-        let v_meta_type = match v.lon.as_str() {
-            /*
-            "speed-time" => MetaType::U32,
-            "tftp-blksize" => MetaType::U32,
-            */
-            "sort" => MetaType::U8,
-            "radix" => MetaType::Other("radix_style".to_string()),
-            "format" => MetaType::Other("format_style".to_string()),
-            _ => v.meta_type.clone(),
-        };
-        //
-        v.meta_type = v_meta_type;
-        //
-        /*
-        let v_is_vec = match v.lon.as_str() {
-            "exp" => true,
-            "format" => true,
-            _ => false,
-        };
-        v.is_vec = v_is_vec;
-        */
+    let r = do_gen_src(
+        Pasc::Subcmd,
+        test_in_path!("gp-cmd-devel/rust-viewexec-info-cmd.txt"),
+        Some(test_out_path!("rust-viewexec-info", "cmd.help.rs.txt")),
+        Some(test_out_path!("rust-viewexec-info", "cmd.match.rs.txt")),
+        do_fix_type,
+    );
+    if let Err(ref err) = r {
+        assert_eq!(format!("{:#}", err), "");
     }
+    assert_eq!(r.is_ok(), true);
+    //
+    compare_out_res!(
+        "rust-viewexec-info",
+        "gp-cmd-devel/rust-viewexec-info",
+        "cmd.help.rs.txt"
+    );
+    compare_out_res!(
+        "rust-viewexec-info",
+        "gp-cmd-devel/rust-viewexec-info",
+        "cmd.match.rs.txt"
+    );
+}
+
+#[test]
+fn gen_src_cmd_sc_size() {
+    assert!(std::fs::create_dir_all(test_out_path!("rust-viewexec-size")).is_ok());
+    //
+    let r = do_gen_src(
+        Pasc::Subcmd,
+        test_in_path!("gp-cmd-devel/rust-viewexec-size-cmd.txt"),
+        Some(test_out_path!("rust-viewexec-size", "cmd.help.rs.txt")),
+        Some(test_out_path!("rust-viewexec-size", "cmd.match.rs.txt")),
+        do_fix_type,
+    );
+    if let Err(ref err) = r {
+        assert_eq!(format!("{:#}", err), "");
+    }
+    assert_eq!(r.is_ok(), true);
+    //
+    compare_out_res!(
+        "rust-viewexec-size",
+        "gp-cmd-devel/rust-viewexec-size",
+        "cmd.help.rs.txt"
+    );
+    compare_out_res!(
+        "rust-viewexec-size",
+        "gp-cmd-devel/rust-viewexec-size",
+        "cmd.match.rs.txt"
+    );
+}
+
+#[test]
+fn gen_src_cmd_sc_string() {
+    assert!(std::fs::create_dir_all(test_out_path!("rust-viewexec-string")).is_ok());
+    //
+    let r = do_gen_src(
+        Pasc::Subcmd,
+        test_in_path!("gp-cmd-devel/rust-viewexec-string-cmd.txt"),
+        Some(test_out_path!("rust-viewexec-string", "cmd.help.rs.txt")),
+        Some(test_out_path!("rust-viewexec-string", "cmd.match.rs.txt")),
+        do_fix_type,
+    );
+    if let Err(ref err) = r {
+        assert_eq!(format!("{:#}", err), "");
+    }
+    assert_eq!(r.is_ok(), true);
+    //
+    compare_out_res!(
+        "rust-viewexec-string",
+        "gp-cmd-devel/rust-viewexec-string",
+        "cmd.help.rs.txt"
+    );
+    compare_out_res!(
+        "rust-viewexec-string",
+        "gp-cmd-devel/rust-viewexec-string",
+        "cmd.match.rs.txt"
+    );
+}
+
+#[test]
+fn gen_src_cmd_sc_symbol() {
+    assert!(std::fs::create_dir_all(test_out_path!("rust-viewexec-symbol")).is_ok());
+    //
+    let r = do_gen_src(
+        Pasc::Subcmd,
+        test_in_path!("gp-cmd-devel/rust-viewexec-symbol-cmd.txt"),
+        Some(test_out_path!("rust-viewexec-symbol", "cmd.help.rs.txt")),
+        Some(test_out_path!("rust-viewexec-symbol", "cmd.match.rs.txt")),
+        do_fix_type,
+    );
+    if let Err(ref err) = r {
+        assert_eq!(format!("{:#}", err), "");
+    }
+    assert_eq!(r.is_ok(), true);
+    //
+    compare_out_res!(
+        "rust-viewexec-symbol",
+        "gp-cmd-devel/rust-viewexec-symbol",
+        "cmd.help.rs.txt"
+    );
+    compare_out_res!(
+        "rust-viewexec-symbol",
+        "gp-cmd-devel/rust-viewexec-symbol",
+        "cmd.match.rs.txt"
+    );
+}
+
+pub fn do_fix_type(opt_str: &OptStr) -> Option<FixupType> {
+    let tup = match opt_str.lon_or_sho() {
+        "sort" => (false, false, MetaType::U8),
+        "radix" => (false, false, MetaType::Other("radix_style".into())),
+        "format" => (false, false, MetaType::Other("format_style".into())),
+        _ => return None,
+    };
+    Some(FixupType::from_tuple(tup))
 }

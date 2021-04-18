@@ -1,6 +1,14 @@
 use super::{GenBuffer, MetaType, OptStr};
 
+#[allow(deprecated, dead_code)]
+#[deprecated(
+    since = "0.1.10",
+    note = "Please use the do_gen_src<F>() function instead"
+)]
 pub fn gen_src_match(vec_optstr: &[OptStr]) -> anyhow::Result<String> {
+    gen_src_match0(vec_optstr)
+}
+pub(crate) fn gen_src_match0(vec_optstr: &[OptStr]) -> anyhow::Result<String> {
     let mut sss = GenBuffer::with_capacity(4 * 1024);
     //
     sss.push_str_ary(&[
