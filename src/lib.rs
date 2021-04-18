@@ -85,12 +85,12 @@ where
             ..Default::default()
         },
     };
-    let sss = gen_src_help0(&vec_optstr, &vec_line, flags)?;
+    let sss = gen_src_help0(&vec_optstr, &vec_line, flags);
     if let Some(s_out_f_help) = out_f_help {
         update_file0(&sss, s_out_f_help)?;
     }
     //
-    let sss = gen_src_match0(&vec_optstr)?;
+    let sss = gen_src_match0(&vec_optstr);
     if let Some(s_out_f_match) = out_f_match {
         update_file0(&sss, s_out_f_match)?;
     }

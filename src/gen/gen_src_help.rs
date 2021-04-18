@@ -2,6 +2,7 @@
 use super::{GenBuffer, MetaType, OptStr, SrcHelpFlags, SrcHelpFlags0};
 use std::cmp::Ordering;
 
+#[allow(clippy::unnecessary_wraps)]
 #[allow(deprecated, dead_code)]
 #[deprecated(
     since = "0.1.10",
@@ -12,13 +13,14 @@ pub fn gen_src_help(
     vec_line: &[String],
     out_flags: SrcHelpFlags,
 ) -> anyhow::Result<String> {
-    gen_src_help0(vec_optstr, vec_line, out_flags.into())
+    Ok(gen_src_help0(vec_optstr, vec_line, out_flags.into()))
 }
+
 pub(crate) fn gen_src_help0(
     vec_optstr: &[OptStr],
     vec_line: &[String],
     out_flags: SrcHelpFlags0,
-) -> anyhow::Result<String> {
+) -> String {
     let mut sss = GenBuffer::with_capacity(4 * 1024);
     //
     sss.push_str_ary(&[
@@ -93,7 +95,7 @@ pub(crate) fn gen_src_help0(
         sss += "*/\n";
     }
     //
-    Ok(sss.into_string())
+    sss.into_string()
 }
 
 fn gen_src_cmd_opt(sss: &mut GenBuffer, vec_optstr: &[OptStr]) {
