@@ -109,3 +109,29 @@ fn value_to_u8(nv: &NameVal<'_>) -> Result<u8, OptParseError> {
         None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
     }
 }
+
+fn value_to_format_style(nv: &NameVal<'_>) -> Result<FormatStyle, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}
+
+fn value_to_radix_style(nv: &NameVal<'_>) -> Result<RadixStyle, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}

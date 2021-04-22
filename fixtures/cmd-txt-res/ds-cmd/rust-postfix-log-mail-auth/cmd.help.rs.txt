@@ -111,3 +111,16 @@ fn value_to_i64(nv: &NameVal<'_>) -> Result<i64, OptParseError> {
         None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
     }
 }
+
+fn value_to_opt_cap_num_nums(nv: &NameVal<'_>) -> Result<OptCapNumNums, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}

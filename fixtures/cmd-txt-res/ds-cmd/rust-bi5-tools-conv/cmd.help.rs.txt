@@ -131,3 +131,42 @@ fn value_to_usize(nv: &NameVal<'_>) -> Result<usize, OptParseError> {
         None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
     }
 }
+
+fn value_to_opt_fromto_date(nv: &NameVal<'_>) -> Result<OptFromtoDate, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}
+
+fn value_to_opt_type_format(nv: &NameVal<'_>) -> Result<OptTypeFormat, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}
+
+fn value_to_opt_uc_x_param(nv: &NameVal<'_>) -> Result<OptUcXParam, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}

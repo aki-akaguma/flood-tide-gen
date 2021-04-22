@@ -63,3 +63,29 @@ impl flood_tide::HelpVersion for CmdOptConf {
         self.flg_version
     }
 }
+
+fn value_to_opt_lc_n_size(nv: &NameVal<'_>) -> Result<OptLcNSize, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}
+
+fn value_to_opt_x_param(nv: &NameVal<'_>) -> Result<OptXParam, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}

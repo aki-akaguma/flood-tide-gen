@@ -105,3 +105,42 @@ fn value_to_usize(nv: &NameVal<'_>) -> Result<usize, OptParseError> {
         None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
     }
 }
+
+fn value_to_opt_according_to_word(nv: &NameVal<'_>) -> Result<OptAccordingToWord, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}
+
+fn value_to_opt_color_when(nv: &NameVal<'_>) -> Result<OptColorWhen, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}
+
+fn value_to_opt_max_buffer_size(nv: &NameVal<'_>) -> Result<OptMaxBufferSize, OptParseError> {
+    match nv.val {
+        Some(s) => match FromStr::from_str(s) {
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        },
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }
+}

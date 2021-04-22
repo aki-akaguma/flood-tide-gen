@@ -289,6 +289,9 @@ fn gen_src_value_to(sss: &mut GenBuffer, vec_optstr: &[OptStr]) {
             vec_mt.push(mt);
         }
     }
+    //
+    #[allow(unused_assignments)]
+    let mut buf = String::new();
     vec_mt.sort();
     for mt in vec_mt.iter() {
         let s = match mt {
@@ -527,7 +530,27 @@ fn value_to_f64(nv: &NameVal<'_>) -> Result<f64, OptParseError> {
 }
 "#
             }
-            MetaType::Other(_string) => r#""#,
+            MetaType::Other(string) => {
+                buf = format!(
+                    r#"
+fn value_to_{}(nv: &NameVal<'_>) -> Result<{}, OptParseError> {{
+    match nv.val {{
+        Some(s) => match FromStr::from_str(s) {{
+            Ok(x) => Ok(x),
+            Err(err) => Err(OptParseError::invalid_option_argument(
+                &nv.opt.lon,
+                &err.to_string(),
+            )),
+        }},
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+    }}
+}}
+"#,
+                    string,
+                    mt.as_type_string(),
+                );
+                buf.as_str()
+            }
         };
         sss.push_str(s);
     }

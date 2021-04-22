@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.11 (2021-04-22)
+=====
+
+* add MetaType::Other(string) of gen_src_value_to()
+
 0.1.10 (2021-04-18)
 =====
 
