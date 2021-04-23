@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.12 (2021-04-23)
+=====
+
+* change to nv.opt.lon_or_sho(): argument of OptParseError::xxx() 
+
 0.1.11 (2021-04-22)
 =====
 

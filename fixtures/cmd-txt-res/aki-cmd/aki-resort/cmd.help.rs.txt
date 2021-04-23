@@ -89,7 +89,7 @@ impl flood_tide::HelpVersion for CmdOptConf {
 fn value_to_string(nv: &NameVal<'_>) -> Result<String, OptParseError> {
     match nv.val {
         Some(x) => Ok(x.to_string()),
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -98,11 +98,11 @@ fn value_to_usize(nv: &NameVal<'_>) -> Result<usize, OptParseError> {
         Some(x) => match x.parse::<usize>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -111,11 +111,11 @@ fn value_to_opt_according_to_word(nv: &NameVal<'_>) -> Result<OptAccordingToWord
         Some(s) => match FromStr::from_str(s) {
             Ok(x) => Ok(x),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -124,11 +124,11 @@ fn value_to_opt_color_when(nv: &NameVal<'_>) -> Result<OptColorWhen, OptParseErr
         Some(s) => match FromStr::from_str(s) {
             Ok(x) => Ok(x),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -137,10 +137,10 @@ fn value_to_opt_max_buffer_size(nv: &NameVal<'_>) -> Result<OptMaxBufferSize, Op
         Some(s) => match FromStr::from_str(s) {
             Ok(x) => Ok(x),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }

@@ -301,7 +301,7 @@ fn gen_src_value_to(sss: &mut GenBuffer, vec_optstr: &[OptStr]) {
 fn value_to_string(nv: &NameVal<'_>) -> Result<String, OptParseError> {
     match nv.val {
         Some(x) => Ok(x.to_string()),
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -313,11 +313,11 @@ fn value_to_i8(nv: &NameVal<'_>) -> Result<i8, OptParseError> {
         Some(x) => match x.parse::<i8>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -329,11 +329,11 @@ fn value_to_i16(nv: &NameVal<'_>) -> Result<i16, OptParseError> {
         Some(x) => match x.parse::<i16>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -345,11 +345,11 @@ fn value_to_i32(nv: &NameVal<'_>) -> Result<i32, OptParseError> {
         Some(x) => match x.parse::<i32>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -361,11 +361,11 @@ fn value_to_i64(nv: &NameVal<'_>) -> Result<i64, OptParseError> {
         Some(x) => match x.parse::<i64>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -377,11 +377,11 @@ fn value_to_i128(nv: &NameVal<'_>) -> Result<i128, OptParseError> {
         Some(x) => match x.parse::<i128>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -393,11 +393,11 @@ fn value_to_u8(nv: &NameVal<'_>) -> Result<u8, OptParseError> {
         Some(x) => match x.parse::<u8>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -409,11 +409,11 @@ fn value_to_u16(nv: &NameVal<'_>) -> Result<u16, OptParseError> {
         Some(x) => match x.parse::<u16>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -425,11 +425,11 @@ fn value_to_u32(nv: &NameVal<'_>) -> Result<u32, OptParseError> {
         Some(x) => match x.parse::<u32>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -441,11 +441,11 @@ fn value_to_u64(nv: &NameVal<'_>) -> Result<u64, OptParseError> {
         Some(x) => match x.parse::<u64>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -457,11 +457,11 @@ fn value_to_u128(nv: &NameVal<'_>) -> Result<u128, OptParseError> {
         Some(x) => match x.parse::<u128>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -473,11 +473,11 @@ fn value_to_isize(nv: &NameVal<'_>) -> Result<isize, OptParseError> {
         Some(x) => match x.parse::<isize>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -489,11 +489,11 @@ fn value_to_usize(nv: &NameVal<'_>) -> Result<usize, OptParseError> {
         Some(x) => match x.parse::<usize>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -505,11 +505,11 @@ fn value_to_f32(nv: &NameVal<'_>) -> Result<f32, OptParseError> {
         Some(x) => match x.parse::<f32>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -521,11 +521,11 @@ fn value_to_f64(nv: &NameVal<'_>) -> Result<f64, OptParseError> {
         Some(x) => match x.parse::<f64>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 "#
@@ -538,11 +538,11 @@ fn value_to_{}(nv: &NameVal<'_>) -> Result<{}, OptParseError> {{
         Some(s) => match FromStr::from_str(s) {{
             Ok(x) => Ok(x),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         }},
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }}
 }}
 "#,

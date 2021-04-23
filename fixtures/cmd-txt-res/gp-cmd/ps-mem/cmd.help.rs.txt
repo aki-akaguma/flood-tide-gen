@@ -77,11 +77,11 @@ fn value_to_i32(nv: &NameVal<'_>) -> Result<i32, OptParseError> {
         Some(x) => match x.parse::<i32>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -90,11 +90,11 @@ fn value_to_u32(nv: &NameVal<'_>) -> Result<u32, OptParseError> {
         Some(x) => match x.parse::<u32>() {
             Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -103,11 +103,11 @@ fn value_to_opt_sort_order(nv: &NameVal<'_>) -> Result<OptSortOrder, OptParseErr
         Some(s) => match FromStr::from_str(s) {
             Ok(x) => Ok(x),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
 
@@ -116,10 +116,10 @@ fn value_to_opt_x_param(nv: &NameVal<'_>) -> Result<OptXParam, OptParseError> {
         Some(s) => match FromStr::from_str(s) {
             Ok(x) => Ok(x),
             Err(err) => Err(OptParseError::invalid_option_argument(
-                &nv.opt.lon,
+                &nv.opt.lon_or_sho(),
                 &err.to_string(),
             )),
         },
-        None => Err(OptParseError::missing_option_argument(&nv.opt.lon)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
     }
 }
