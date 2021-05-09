@@ -2,6 +2,11 @@ TBD
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.13 (2021-05-09)
+=====
+
+* update depends: regex(1.5.4)
+
 0.1.12 (2021-04-23)
 =====
 
