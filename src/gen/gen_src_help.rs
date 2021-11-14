@@ -154,7 +154,7 @@ fn gen_src_opt_ary_sho_idx(sss: &mut GenBuffer, vec_optstr_sorted: &[&OptStr]) {
         .filter(|(_, &o)| !o.sho.is_empty())
         .map(|(i, &o)| (&o.sho, i))
         .collect();
-    vec_optstr_sho_idx.sort_by(|a, b| a.0.cmp(&b.0));
+    vec_optstr_sho_idx.sort_by(|a, b| a.0.cmp(b.0));
     //
     let s = r#"
 #[rustfmt::skip]

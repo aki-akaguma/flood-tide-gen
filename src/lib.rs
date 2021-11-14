@@ -1,3 +1,24 @@
+/*!
+generating the source codes that is used by [flood-tide](https://crates.io/crates/flood-tide).
+
+# Features
+
+- generate tables that is used by [flood-tide](https://crates.io/crates/flood-tide)
+- easy to use by xtask
+- parsing text define format file that has command options like help text
+- minimum support rustc 1.40.0 (73528e339 2019-12-16)
+
+# Todos
+
+- [ ] adding test codes
+- [ ] other define format support  (like yaml,json)
+
+# Supports
+
+- [flood-tide](https://crates.io/crates/flood-tide) - command option parsing
+- [aki-gsub](https://crates.io/crates/aki-gsub) - the sample used *flood-tide*
+
+*/
 mod gen;
 
 #[allow(deprecated, dead_code)]
