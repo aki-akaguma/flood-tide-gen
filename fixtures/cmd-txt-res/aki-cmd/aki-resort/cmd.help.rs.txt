@@ -16,7 +16,7 @@ Other options:
 ";
 
 #[repr(u8)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 enum CmdOp {
     Reverse,
     AccordingTo,
@@ -59,7 +59,7 @@ const OPT_ARY: [Opt;10] = [
 const OPT_ARY_SHO_IDX: [(u8,usize);7] = [
 (b'H',4),(b'V',9),(b'e',2),(b'h',3),(b'r',6),(b't',7),(b'u',8),];
 
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, PartialEq, Eq)]
 pub struct CmdOptConf {
     pub prog_name: String,
     //

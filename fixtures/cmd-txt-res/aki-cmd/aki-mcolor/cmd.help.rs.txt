@@ -13,7 +13,7 @@ const OPTIONS_TEXT: &str = r"Options:
 ";
 
 #[repr(u8)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 enum CmdOp {
     Red,
     Green,
@@ -54,7 +54,7 @@ const OPT_ARY: [Opt;9] = [
 const OPT_ARY_SHO_IDX: [(u8,usize);9] = [
 (b'H',3),(b'V',7),(b'b',0),(b'c',1),(b'g',2),(b'm',4),(b'r',5),(b'u',6),(b'y',8),];
 
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, PartialEq, Eq)]
 pub struct CmdOptConf {
     pub prog_name: String,
     //

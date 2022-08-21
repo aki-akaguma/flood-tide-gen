@@ -12,7 +12,7 @@ const OPTIONS_TEXT: &str = r"Options:
 ";
 
 #[repr(u8)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 enum CmdOp {
     Format,
     Radix,
@@ -51,7 +51,7 @@ const OPT_ARY: [Opt;8] = [
 const OPT_ARY_SHO_IDX: [(u8,usize);6] = [
 (b'D',0),(b'H',2),(b'V',7),(b'f',1),(b'r',3),(b't',6),];
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct SubCmdOptConf<'a> {
     pub parent: &'a CmdOptConf,
     pub prog_name: String,

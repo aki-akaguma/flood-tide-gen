@@ -5,7 +5,7 @@ const OPTIONS_TEXT: &str = r"Options:
 ";
 
 #[repr(u8)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 enum CmdOp {
     Help,
     Version,
@@ -32,7 +32,7 @@ const OPT_ARY: [Opt;2] = [
 const OPT_ARY_SHO_IDX: [(u8,usize);2] = [
 (b'H',0),(b'V',1),];
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct SubCmdOptConf<'a> {
     pub parent: &'a CmdOptConf,
     pub prog_name: String,

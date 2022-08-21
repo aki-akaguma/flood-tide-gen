@@ -2,6 +2,11 @@ TBD: flood-tide-gen
 ===
 Unreleased changes. Release notes have not yet been written.
 
+0.1.17 (2022-08-21)
+=====
+
+* fix gen src: you are deriving `PartialEq` and can implement `Eq`
+
 0.1.16 (2022-06-13)
 =====
 

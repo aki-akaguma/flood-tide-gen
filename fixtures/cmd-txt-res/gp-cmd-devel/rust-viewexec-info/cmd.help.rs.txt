@@ -17,7 +17,7 @@ const OPTIONS_TEXT: &str = r"Options:
 ";
 
 #[repr(u8)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 enum CmdOp {
     FileHeader,
     ProgramHeaders,
@@ -66,7 +66,7 @@ const OPT_ARY: [Opt;13] = [
 const OPT_ARY_SHO_IDX: [(u8,usize);11] = [
 (b'D',0),(b'H',4),(b'S',8),(b'V',11),(b'd',2),(b'h',3),(b'l',6),(b'n',5),(b'r',7),(b's',10),(b'v',12),];
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct SubCmdOptConf<'a> {
     pub parent: &'a CmdOptConf,
     pub prog_name: String,

@@ -101,7 +101,7 @@ pub(crate) fn gen_src_help0(
 fn gen_src_cmd_opt(sss: &mut GenBuffer, vec_optstr: &[OptStr]) {
     *sss += r#"
 #[repr(u8)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 enum CmdOp {
 "#;
     for rec in vec_optstr.iter() {
@@ -173,7 +173,7 @@ fn gen_src_struct_cmd_opt_conf(
 ) {
     if !out_flags.subcmd_opt_conf {
         *sss += r#"
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, PartialEq, Eq)]
 pub struct CmdOptConf {
     pub prog_name: String,
 "#;
@@ -183,7 +183,7 @@ pub struct CmdOptConf {
         }
     } else {
         *sss += r#"
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct SubCmdOptConf<'a> {
     pub parent: &'a CmdOptConf,
     pub prog_name: String,
