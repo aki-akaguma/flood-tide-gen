@@ -1,6 +1,6 @@
 [package]
 name = "flood-tide-gen"
-version = "0.1.17"
+version = "0.1.18"
 authors = ["aki <aki.akaguma@hotmail.com>"]
 description = "command line flag and option parse utilities"
 keywords = ["parse", "option", "command", "flag", "argument"]
@@ -13,4 +13,4 @@ repository = "https://github.com/aki-akaguma/flood-tide-gen"
 [dependencies]
 anyhow = "1.0"
 case = "1.0"
-regex = "1.5"
+regex = "1.7"
