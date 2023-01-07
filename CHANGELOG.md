@@ -109,7 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] (2021-01-17)
 * first commit
 
-[Unreleased]: https://github.com/aki-akaguma/flood-tide-gen/compare/v0.2.7..HEAD
+[Unreleased]: https://github.com/aki-akaguma/flood-tide-gen/compare/v0.1.18..HEAD
 [0.1.18]: https://github.com/aki-akaguma/flood-tide-gen/compare/v0.1.17..v0.1.18
 [0.1.17]: https://github.com/aki-akaguma/flood-tide-gen/compare/v0.1.16..v0.1.17
 [0.1.16]: https://github.com/aki-akaguma/flood-tide-gen/compare/v0.1.15..v0.1.16
