@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] *
 ### Added
 * version difference link into `CHANGELOG.md`
+* rust-version = "1.57.0" into Cargo.toml
 
 
 ## [0.1.18] (2023-01-05)

@@ -6,7 +6,7 @@ generating the source codes that is used by [flood-tide](https://crates.io/crate
 - generate tables that is used by [flood-tide](https://crates.io/crates/flood-tide)
 - easy to use by xtask
 - parsing text define format file that has command options like help text
-- minimum support rustc 1.56.1 (59eed8a2a 2021-11-01)
+- minimum support rustc 1.57.0 (f1edd0429 2021-11-29)
 
 # Todos
 
