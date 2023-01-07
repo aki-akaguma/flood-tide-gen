@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * version difference link into `CHANGELOG.md`
 * rust-version = "1.57.0" into Cargo.toml
+* `all-test-version` target into Makefile
 
 
 ## [0.1.18] (2023-01-05)
 ### Changed
-* reformat `README.md`
+* reformat `CHANGELOG.md`
 * update crates: regex(1.7.0)
 
 ## [0.1.17] (2022-08-21)
