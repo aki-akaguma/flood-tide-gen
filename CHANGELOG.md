@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 * Makefile: rustc version `1.66.0` to `1.66.1`
 * clippy: `bool_assert_comparison`
+* bug: test on windows, return of `compare_file()` was error
 
 
 ## [0.1.19] (2023-01-10)

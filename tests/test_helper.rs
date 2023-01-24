@@ -60,5 +60,7 @@ where
 {
     let a_ss = std::fs::read_to_string(a).context(format!("{}", a))?;
     let b_ss = std::fs::read_to_string(b).context(format!("{}", b))?;
+    let a_ss = a_ss.replace("\r\n", "\n");
+    let b_ss = b_ss.replace("\r\n", "\n");
     Ok(a_ss == b_ss)
 }
