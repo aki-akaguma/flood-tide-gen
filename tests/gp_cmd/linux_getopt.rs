@@ -25,7 +25,7 @@ fn gen_src_cmd() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!("linux-getopt", "gp-cmd/linux-getopt", "cmd.help.rs.txt");
     compare_out_res!("linux-getopt", "gp-cmd/linux-getopt", "cmd.match.rs.txt");

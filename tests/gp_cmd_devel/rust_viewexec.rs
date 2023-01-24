@@ -15,7 +15,7 @@ fn gen_src_cmd_parent() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-viewexec",
@@ -43,7 +43,7 @@ fn gen_src_cmd_sc_info() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-viewexec-info",
@@ -71,7 +71,7 @@ fn gen_src_cmd_sc_size() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-viewexec-size",
@@ -99,7 +99,7 @@ fn gen_src_cmd_sc_string() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-viewexec-string",
@@ -127,7 +127,7 @@ fn gen_src_cmd_sc_symbol() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-viewexec-symbol",

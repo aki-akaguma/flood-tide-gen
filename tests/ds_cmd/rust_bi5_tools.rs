@@ -15,7 +15,7 @@ fn gen_src_cmd_parent() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!("rust-bi5-tools", "ds-cmd/rust-bi5-tools", "cmd.help.rs.txt");
     compare_out_res!(
@@ -39,7 +39,7 @@ fn gen_src_cmd_sc_cat() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-bi5-tools-cat",
@@ -67,7 +67,7 @@ fn gen_src_cmd_sc_conv() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-bi5-tools-conv",
@@ -95,7 +95,7 @@ fn gen_src_cmd_sc_list() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-bi5-tools-list",
@@ -123,7 +123,7 @@ fn gen_src_cmd_sc_text() {
     if let Err(ref err) = r {
         assert_eq!(format!("{:#}", err), "");
     }
-    assert_eq!(r.is_ok(), true);
+    assert!(r.is_ok());
     //
     compare_out_res!(
         "rust-bi5-tools-text",
