@@ -4,6 +4,7 @@
 [![Docs][docs-image]][docs-link]
 ![Rust Version][rustc-image]
 ![Apache2/MIT licensed][license-image]
+[![Test][test-image]][test-link]
 
 generating the source codes that is used by [flood-tide](https://crates.io/crates/flood-tide).
 
@@ -48,3 +49,5 @@ at your option.
 [docs-link]: https://docs.rs/flood-tide-gen/
 [rustc-image]: https://img.shields.io/badge/rustc-1.56+-blue.svg
 [license-image]: https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg
+[test-image]: https://github.com/aki-akaguma/flood-tide-gen/actions/workflows/test.yml/badge.svg
+[test-link]: https://github.com/aki-akaguma/flood-tide-gen/actions/workflows/test.yml
