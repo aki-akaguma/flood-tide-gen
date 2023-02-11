@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * `LICENSE-APACHE`, `LICENSE-MIT`
+* rust-version: "1.57.0" into "1.56.0"
 
 
 ## [0.1.20] (2023-01-28)
