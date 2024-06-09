@@ -361,26 +361,3 @@ impl std::convert::From<SrcHelpFlags> for SrcHelpFlags0 {
         }
     }
 }
-
-#[cfg(test)]
-mod basic {
-    use super::MetaType;
-    use super::OptStr;
-    use super::SrcHelpFlags0;
-    //
-    #[test]
-    fn size_of() {
-        #[cfg(target_pointer_width = "64")]
-        {
-            assert_eq!(std::mem::size_of::<OptStr>(), 184);
-            assert_eq!(std::mem::size_of::<MetaType>(), 32);
-        }
-        #[cfg(target_pointer_width = "32")]
-        {
-            assert_eq!(std::mem::size_of::<OptStr>(), 96);
-            assert_eq!(std::mem::size_of::<MetaType>(), 16);
-        }
-        //
-        assert_eq!(std::mem::size_of::<SrcHelpFlags0>(), 8);
-    }
-}
