@@ -137,7 +137,7 @@ impl OptStr {
 #[rustfmt::skip]
 #[derive(Debug,Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum MetaType {
-    Bool, String,
+    Bool, String, Path,
     I8, I16, I32, I64, I128,
     U8, U16, U32, U64, U128,
     Isize, Usize,
@@ -150,6 +150,7 @@ impl MetaType {
         match self {
             MetaType::Bool => "bool".to_string(),
             MetaType::String => "String".to_string(),
+            MetaType::Path => "PathBuf".to_string(),
             MetaType::I8 => "i8".to_string(),
             MetaType::I16 => "i16".to_string(),
             MetaType::I32 => "i32".to_string(),

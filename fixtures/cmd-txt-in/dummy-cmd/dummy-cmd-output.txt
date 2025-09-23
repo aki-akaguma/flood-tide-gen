@@ -1,0 +1,4 @@
+  -a, --alpha <value>      Alpha value
+      --beta               Beta flag
+  -g                       Gamma flag
+  -o, --output-file <file> File path

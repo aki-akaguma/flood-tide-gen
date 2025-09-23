@@ -530,6 +530,16 @@ fn value_to_f64(nv: &NameVal<'_>) -> Result<f64, OptParseError> {
 }
 "#
             }
+            MetaType::Path => {
+                r#"
+fn value_to_path(nv: &NameVal<'_>) -> Result<std::path::PathBuf, OptParseError> {
+    match nv.val {
+        Some(x) => Ok(std::path::PathBuf::from(x)),
+        None => Err(OptParseError::missing_option_argument(&nv.opt.lon_or_sho())),
+    }
+}
+"#
+            }
             MetaType::Other(string) => {
                 buf = format!(
                     r#"

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 * `specs`
+* `gen::MetaType::Path`
 
 ## [0.1.22] (2024-06-09)
 ### Changed

@@ -1,4 +1,3 @@
-use crate::test_helper::compare_file;
 use flood_tide_gen::{do_gen_src, FixupType, MetaType, OptStr, Pasc};
 //
 #[test]

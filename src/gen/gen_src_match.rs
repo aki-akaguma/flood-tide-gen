@@ -24,6 +24,7 @@ pub(crate) fn gen_src_match0(vec_optstr: &[OptStr]) -> String {
         let s: String = match &rec.meta_type {
             MetaType::Bool => "true".into(),
             MetaType::String => "value_to_string(nv)?".into(),
+            MetaType::Path => "value_to_path(nv)?".into(),
             MetaType::I8 => "value_to_i8(nv)?".into(),
             MetaType::I16 => "value_to_i16(nv)?".into(),
             MetaType::I32 => "value_to_i32(nv)?".into(),
