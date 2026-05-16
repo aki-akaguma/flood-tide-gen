@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * refactor `OptStr::to_enum` and `OptStr::to_field` to use `heck`
 * refactor `MetaType::as_type_string` to use `heck`
 
+### Removed
+* unnecessary test file `tests/basic.rs`
+
 
 ## [0.2.0] (2025-09-24)
 ### Added
