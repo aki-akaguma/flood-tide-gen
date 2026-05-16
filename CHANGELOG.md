@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * refactor `OptStr::to_enum` and `OptStr::to_field` to use `heck`
 * refactor `MetaType::as_type_string` to use `heck`
 * rename internal functions and structs to remove the `0` suffix
+* replace `unsafe { std::mem::transmute(value) }` with a safe `match` statement in generated code
 
 ### Removed
 * unnecessary test file `tests/basic.rs`

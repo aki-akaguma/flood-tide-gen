@@ -42,12 +42,25 @@ enum CmdOp {
 
 impl std::convert::From<u8> for CmdOp {
     fn from(value: u8) -> Self {
-        unsafe { std::mem::transmute(value) }
-    }
-}
-impl CmdOp {
-    pub const fn to(self) -> OptNum {
-        self as OptNum
+        match value {
+            0 => CmdOp::Stage1,
+            1 => CmdOp::CapNum1,
+            2 => CmdOp::Stage2,
+            3 => CmdOp::CapNum2,
+            4 => CmdOp::Stage3,
+            5 => CmdOp::CapNum3,
+            6 => CmdOp::Stage4,
+            7 => CmdOp::CapNum4,
+            8 => CmdOp::Stage5,
+            9 => CmdOp::CapNum5,
+            10 => CmdOp::Quiet,
+            11 => CmdOp::Debug,
+            12 => CmdOp::ExpireMinutes,
+            13 => CmdOp::HelpExpression,
+            14 => CmdOp::Help,
+            15 => CmdOp::Version,
+            _ => unreachable!(),
+        }
     }
 }
 

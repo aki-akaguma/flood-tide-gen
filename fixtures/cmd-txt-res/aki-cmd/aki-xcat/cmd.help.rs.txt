@@ -22,12 +22,15 @@ enum CmdOp {
 
 impl std::convert::From<u8> for CmdOp {
     fn from(value: u8) -> Self {
-        unsafe { std::mem::transmute(value) }
-    }
-}
-impl CmdOp {
-    pub const fn to(self) -> OptNum {
-        self as OptNum
+        match value {
+            0 => CmdOp::Number,
+            1 => CmdOp::FileName,
+            2 => CmdOp::PathName,
+            3 => CmdOp::PipeIn,
+            4 => CmdOp::Help,
+            5 => CmdOp::Version,
+            _ => unreachable!(),
+        }
     }
 }
 

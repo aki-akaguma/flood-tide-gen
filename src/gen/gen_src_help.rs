@@ -111,12 +111,13 @@ enum CmdOp {
     *sss += r#"
 impl std::convert::From<u8> for CmdOp {
     fn from(value: u8) -> Self {
-        unsafe { std::mem::transmute(value) }
+        match value {
+"#;
+    for (i, rec) in vec_optstr.iter().enumerate() {
+        *sss += &format!("            {} => CmdOp::{},\n", i, rec.enum_s);
     }
-}
-impl CmdOp {
-    pub const fn to(self) -> OptNum {
-        self as OptNum
+    *sss += r#"            _ => unreachable!(),
+        }
     }
 }
 "#;
