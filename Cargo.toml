@@ -13,5 +13,5 @@ repository = "https://github.com/aki-akaguma/flood-tide-gen"
 
 [dependencies]
 anyhow = "1.0"
-case = "1.0"
+heck = "0.5"
 regex = "1.7"

@@ -1,5 +1,5 @@
 use anyhow::Context;
-use case::CaseExt;
+use heck::{ToPascalCase, ToSnakeCase};
 use std::io::{BufRead, Read, Write};
 
 mod gen_buffer;
@@ -82,54 +82,35 @@ impl OptStr {
     }
     fn to_enum(&self) -> String {
         if !self.lon.is_empty() {
-            let r = &self.lon;
-            let v: Vec<_> = r
-                .split('-')
-                .map(|w| {
-                    let mut cs: Vec<char> = w.chars().collect();
-                    cs[0] = cs[0].to_ascii_uppercase();
-                    let mut s = String::new();
-                    for c in cs {
-                        s.push(if c == '.' { '_' } else { c });
-                    }
-                    s
-                })
-                .collect();
-            v.join("")
+            self.lon.to_pascal_case()
         } else if let Some(c) = self.sho.chars().next() {
             if c.is_ascii_lowercase() {
-                "Lc".to_string() + &self.sho.to_uppercase()
+                format!("Lc{}", self.sho.to_uppercase())
             } else if c.is_ascii_uppercase() {
-                "Uc".to_string() + &self.sho
+                format!("Uc{}", self.sho)
             } else {
-                "Cc".to_string() + &self.sho.to_uppercase()
+                format!("Cc{}", self.sho.to_uppercase())
             }
         } else {
-            "".to_string()
+            String::new()
         }
     }
     fn to_field(&self) -> String {
         let s = if !self.lon.is_empty() {
-            let mut s = String::with_capacity(self.lon.len());
-            for c in self.lon.chars() {
-                #[rustfmt::skip]
-                let c = match c { '-' => '_', '.' => '_', _ => c, };
-                s.push(c);
-            }
-            s
+            self.lon.to_snake_case()
         } else if let Some(c) = self.sho.chars().next() {
             if c.is_ascii_lowercase() {
-                "lc_".to_string() + &self.sho
+                format!("lc_{}", self.sho)
             } else if c.is_ascii_uppercase() {
-                "uc_".to_string() + &self.sho.to_lowercase()
+                format!("uc_{}", self.sho.to_lowercase())
             } else {
-                "cc_".to_string() + &self.sho
+                format!("cc_{}", self.sho)
             }
         } else {
-            "".to_string()
+            String::new()
         };
         let prefix = if self.meta.is_empty() { "flg_" } else { "opt_" };
-        prefix.to_string() + &s
+        format!("{}{}", prefix, s)
     }
 }
 
@@ -165,7 +146,7 @@ impl MetaType {
             MetaType::Usize => "usize".to_string(),
             MetaType::F32 => "f32".to_string(),
             MetaType::F64 => "f64".to_string(),
-            MetaType::Other(s) => s.to_camel(),
+            MetaType::Other(s) => s.to_pascal_case(),
         }
     }
 }
