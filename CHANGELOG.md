@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * replace the `case` crate with `heck`
 * refactor `OptStr::to_enum` and `OptStr::to_field` to use `heck`
 * refactor `MetaType::as_type_string` to use `heck`
+* rename internal functions and structs to remove the `0` suffix
 
 ### Removed
 * unnecessary test file `tests/basic.rs`

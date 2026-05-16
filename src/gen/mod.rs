@@ -13,8 +13,8 @@ pub use gen_src_help::gen_src_help;
 #[allow(deprecated)]
 pub use gen_src_match::gen_src_match;
 
-pub(crate) use gen_src_help::gen_src_help0;
-pub(crate) use gen_src_match::gen_src_match0;
+pub(crate) use gen_src_help::gen_src_help_internal;
+pub(crate) use gen_src_match::gen_src_match_internal;
 
 #[allow(deprecated, dead_code)]
 #[deprecated(
@@ -22,9 +22,9 @@ pub(crate) use gen_src_match::gen_src_match0;
     note = "Please use the do_gen_src<F>() function instead"
 )]
 pub fn update_file(sss: &str, file_path: &str) -> anyhow::Result<()> {
-    update_file0(sss, file_path)
+    update_file_internal(sss, file_path)
 }
-pub(crate) fn update_file0(sss: &str, file_path: &str) -> anyhow::Result<()> {
+pub(crate) fn update_file_internal(sss: &str, file_path: &str) -> anyhow::Result<()> {
     let contents = {
         let mut contents = String::new();
         if let Ok(mut file) = std::fs::File::open(file_path) {
@@ -162,10 +162,10 @@ impl Default for MetaType {
     note = "Please use the do_gen_src<F>() function instead"
 )]
 pub fn parse_input_file(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<String>)> {
-    parse_input_file0(in_file)
+    parse_input_file_internal(in_file)
 }
 
-pub(crate) fn parse_input_file0(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<String>)> {
+pub(crate) fn parse_input_file_internal(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<String>)> {
     let mut vec_line: Vec<String> = Vec::new();
     let mut vec_optstr: Vec<OptStr> = Vec::new();
     //
@@ -304,7 +304,7 @@ impl Default for SrcHelpFlags {
 }
 
 #[derive(Debug)]
-pub(crate) struct SrcHelpFlags0 {
+pub(crate) struct SrcHelpFlagsInternal {
     pub options_text: bool,
     pub cmd_op: bool,
     pub opt_ary: bool,
@@ -314,7 +314,7 @@ pub(crate) struct SrcHelpFlags0 {
     pub subcmd_opt_conf: bool,
     pub value_to: bool,
 }
-impl Default for SrcHelpFlags0 {
+impl Default for SrcHelpFlagsInternal {
     fn default() -> Self {
         Self {
             options_text: true,
@@ -329,9 +329,9 @@ impl Default for SrcHelpFlags0 {
     }
 }
 #[allow(deprecated)]
-impl std::convert::From<SrcHelpFlags> for SrcHelpFlags0 {
-    fn from(item: SrcHelpFlags) -> SrcHelpFlags0 {
-        SrcHelpFlags0 {
+impl std::convert::From<SrcHelpFlags> for SrcHelpFlagsInternal {
+    fn from(item: SrcHelpFlags) -> SrcHelpFlagsInternal {
+        SrcHelpFlagsInternal {
             options_text: item.options_text,
             cmd_op: item.cmd_op,
             opt_ary: item.opt_ary,

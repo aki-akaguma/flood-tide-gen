@@ -1,5 +1,5 @@
 #[allow(deprecated)]
-use super::{GenBuffer, MetaType, OptStr, SrcHelpFlags, SrcHelpFlags0};
+use super::{GenBuffer, MetaType, OptStr, SrcHelpFlags, SrcHelpFlagsInternal};
 use std::cmp::Ordering;
 
 #[allow(clippy::unnecessary_wraps)]
@@ -13,13 +13,13 @@ pub fn gen_src_help(
     vec_line: &[String],
     out_flags: SrcHelpFlags,
 ) -> anyhow::Result<String> {
-    Ok(gen_src_help0(vec_optstr, vec_line, out_flags.into()))
+    Ok(gen_src_help_internal(vec_optstr, vec_line, out_flags.into()))
 }
 
-pub(crate) fn gen_src_help0(
+pub(crate) fn gen_src_help_internal(
     vec_optstr: &[OptStr],
     vec_line: &[String],
-    out_flags: SrcHelpFlags0,
+    out_flags: SrcHelpFlagsInternal,
 ) -> String {
     let mut sss = GenBuffer::with_capacity(4 * 1024);
     //
@@ -169,7 +169,7 @@ const OPT_ARY_SHO_IDX: [(u8,usize);"#;
 fn gen_src_struct_cmd_opt_conf(
     sss: &mut GenBuffer,
     vec_optstr: &[OptStr],
-    out_flags: &SrcHelpFlags0,
+    out_flags: &SrcHelpFlagsInternal,
 ) {
     if !out_flags.subcmd_opt_conf {
         *sss += r#"

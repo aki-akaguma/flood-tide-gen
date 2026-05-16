@@ -24,7 +24,7 @@ mod gen;
 #[allow(deprecated, dead_code)]
 pub use gen::{gen_src_help, gen_src_match, parse_input_file, update_file, SrcHelpFlags};
 
-use gen::{gen_src_help0, gen_src_match0, parse_input_file0, update_file0, SrcHelpFlags0};
+use gen::{gen_src_help_internal, gen_src_match_internal, parse_input_file_internal, update_file_internal, SrcHelpFlagsInternal};
 pub use gen::{MetaType, OptStr};
 
 ///
@@ -86,34 +86,34 @@ pub fn do_gen_src<F>(
 where
     F: Fn(&OptStr) -> Option<FixupType>,
 {
-    let (mut vec_optstr, vec_line) = parse_input_file0(in_f)?;
+    let (mut vec_optstr, vec_line) = parse_input_file_internal(in_f)?;
     //
     fix_type_ary(&mut vec_optstr, f);
     //
     let flags = match pas {
-        Pasc::Void => SrcHelpFlags0::default(),
-        Pasc::Parent => SrcHelpFlags0 {
+        Pasc::Void => SrcHelpFlagsInternal::default(),
+        Pasc::Parent => SrcHelpFlagsInternal {
             cmd_opt_conf_has_subcmd: true,
             ..Default::default()
         },
-        Pasc::Subcmd => SrcHelpFlags0 {
+        Pasc::Subcmd => SrcHelpFlagsInternal {
             subcmd_opt_conf: true,
             ..Default::default()
         },
-        Pasc::PareSubc => SrcHelpFlags0 {
+        Pasc::PareSubc => SrcHelpFlagsInternal {
             cmd_opt_conf_has_subcmd: true,
             subcmd_opt_conf: true,
             ..Default::default()
         },
     };
-    let sss = gen_src_help0(&vec_optstr, &vec_line, flags);
+    let sss = gen_src_help_internal(&vec_optstr, &vec_line, flags);
     if let Some(s_out_f_help) = out_f_help {
-        update_file0(&sss, s_out_f_help)?;
+        update_file_internal(&sss, s_out_f_help)?;
     }
     //
-    let sss = gen_src_match0(&vec_optstr);
+    let sss = gen_src_match_internal(&vec_optstr);
     if let Some(s_out_f_match) = out_f_match {
-        update_file0(&sss, s_out_f_match)?;
+        update_file_internal(&sss, s_out_f_match)?;
     }
     //
     Ok(())
