@@ -116,9 +116,11 @@ impl OptStr {
 
 /// Meta Type of command option
 #[rustfmt::skip]
-#[derive(Debug,Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum MetaType {
-    Bool, String, Path,
+    #[default]
+    Bool,
+    String, Path,
     I8, I16, I32, I64, I128,
     U8, U16, U32, U64, U128,
     Isize, Usize,
@@ -150,11 +152,6 @@ impl MetaType {
         }
     }
 }
-impl Default for MetaType {
-    fn default() -> Self {
-        MetaType::Bool
-    }
-}
 
 #[allow(deprecated, dead_code)]
 #[deprecated(
@@ -165,7 +162,9 @@ pub fn parse_input_file(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<Strin
     parse_input_file_internal(in_file)
 }
 
-pub(crate) fn parse_input_file_internal(in_file: &str) -> anyhow::Result<(Vec<OptStr>, Vec<String>)> {
+pub(crate) fn parse_input_file_internal(
+    in_file: &str,
+) -> anyhow::Result<(Vec<OptStr>, Vec<String>)> {
     let mut vec_line: Vec<String> = Vec::new();
     let mut vec_optstr: Vec<OptStr> = Vec::new();
     //

@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * rust-version: "1.68.0"
 * update crate: regex(1.12)
 
+### Fixed
+* `clippy::derivable_impls`
+
 ### Removed
 * unnecessary test file `tests/basic.rs`
 
