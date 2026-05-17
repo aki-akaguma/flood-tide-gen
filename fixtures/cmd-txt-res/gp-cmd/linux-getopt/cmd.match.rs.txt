@@ -4,13 +4,13 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_alternative = true;
     }
     CmdOp::Longoptions => {
-        conf.opt_longoptions = Some(value_to_string(nv)?);
+        conf.opt_longoptions = Some(value_to_type::<String>(nv)?);
     }
     CmdOp::Name => {
-        conf.opt_name = value_to_string(nv)?;
+        conf.opt_name = value_to_type::<String>(nv)?;
     }
     CmdOp::Options => {
-        conf.opt_options = Some(value_to_string(nv)?);
+        conf.opt_options = Some(value_to_type::<String>(nv)?);
     }
     CmdOp::Quiet => {
         conf.flg_quiet = true;
@@ -19,7 +19,7 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_quiet_output = true;
     }
     CmdOp::Shell => {
-        conf.opt_shell = Some(value_to_string(nv)?);
+        conf.opt_shell = Some(value_to_type::<String>(nv)?);
     }
     CmdOp::Test => {
         conf.flg_test = true;
@@ -34,6 +34,6 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_version = true;
     }
     CmdOp::UcX => {
-        conf.opt_uc_x.push(value_to_opt_x_param(nv)?);
+        conf.opt_uc_x.push(value_to_type::<OptXParam>(nv)?);
     }
 }

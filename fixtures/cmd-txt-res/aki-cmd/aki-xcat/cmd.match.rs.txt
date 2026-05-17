@@ -10,7 +10,7 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_path_name = true;
     }
     CmdOp::PipeIn => {
-        conf.opt_pipe_in = value_to_string(nv)?;
+        conf.opt_pipe_in = value_to_type::<String>(nv)?;
     }
     CmdOp::Help => {
         conf.flg_help = true;

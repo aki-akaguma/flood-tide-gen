@@ -23,23 +23,8 @@ pub(crate) fn gen_src_match_internal(vec_optstr: &[OptStr]) -> String {
         sss += a;
         let s: String = match &rec.meta_type {
             MetaType::Bool => "true".into(),
-            MetaType::String => "value_to_string(nv)?".into(),
-            MetaType::Path => "value_to_path(nv)?".into(),
-            MetaType::I8 => "value_to_i8(nv)?".into(),
-            MetaType::I16 => "value_to_i16(nv)?".into(),
-            MetaType::I32 => "value_to_i32(nv)?".into(),
-            MetaType::I64 => "value_to_i64(nv)?".into(),
-            MetaType::I128 => "value_to_i128(nv)?".into(),
-            MetaType::U8 => "value_to_u8(nv)?".into(),
-            MetaType::U16 => "value_to_u16(nv)?".into(),
-            MetaType::U32 => "value_to_u32(nv)?".into(),
-            MetaType::U64 => "value_to_u64(nv)?".into(),
-            MetaType::U128 => "value_to_u128(nv)?".into(),
-            MetaType::Isize => "value_to_isize(nv)?".into(),
-            MetaType::Usize => "value_to_usize(nv)?".into(),
-            MetaType::F32 => "value_to_f32(nv)?".into(),
-            MetaType::F64 => "value_to_f64(nv)?".into(),
-            MetaType::Other(string) => format!("value_to_{}(nv)?", string),
+            MetaType::Path => "value_to_type::<std::path::PathBuf>(nv)?".into(),
+            mt => format!("value_to_type::<{}>(nv)?", mt.as_type_string()),
         };
         if !s.is_empty() {
             sss += "        conf.";

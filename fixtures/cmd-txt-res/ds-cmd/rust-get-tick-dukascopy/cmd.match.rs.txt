@@ -4,16 +4,16 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_update = true;
     }
     CmdOp::Symbol => {
-        conf.opt_symbol = value_to_string(nv)?;
+        conf.opt_symbol = value_to_type::<String>(nv)?;
     }
     CmdOp::Output => {
-        conf.opt_output = value_to_string(nv)?;
+        conf.opt_output = value_to_type::<String>(nv)?;
     }
     CmdOp::From => {
-        conf.opt_from = Some(value_to_opt_fromto_date(nv)?);
+        conf.opt_from = Some(value_to_type::<OptFromtoDate>(nv)?);
     }
     CmdOp::To => {
-        conf.opt_to = Some(value_to_opt_fromto_date(nv)?);
+        conf.opt_to = Some(value_to_type::<OptFromtoDate>(nv)?);
     }
     CmdOp::Help => {
         conf.flg_help = true;

@@ -10,7 +10,7 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_append_file_name = true;
     }
     CmdOp::Separator => {
-        conf.opt_separator = value_to_string(nv)?;
+        conf.opt_separator = value_to_type::<String>(nv)?;
     }
     CmdOp::Help => {
         conf.flg_help = true;

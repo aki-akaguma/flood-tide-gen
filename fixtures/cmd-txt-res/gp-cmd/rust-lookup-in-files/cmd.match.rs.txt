@@ -4,10 +4,10 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_starts_with = true;
     }
     CmdOp::Input => {
-        conf.opt_input = Some(value_to_string(nv)?);
+        conf.opt_input = Some(value_to_type::<String>(nv)?);
     }
     CmdOp::Output => {
-        conf.opt_output = Some(value_to_string(nv)?);
+        conf.opt_output = Some(value_to_type::<String>(nv)?);
     }
     CmdOp::Help => {
         conf.flg_help = true;

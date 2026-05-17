@@ -13,10 +13,10 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_dry_run = true;
     }
     CmdOp::Exclude => {
-        conf.opt_exclude = value_to_string(nv)?;
+        conf.opt_exclude = value_to_type::<String>(nv)?;
     }
     CmdOp::LimitSize => {
-        conf.opt_limit_size = value_to_string(nv)?;
+        conf.opt_limit_size = value_to_type::<String>(nv)?;
     }
     CmdOp::Help => {
         conf.flg_help = true;

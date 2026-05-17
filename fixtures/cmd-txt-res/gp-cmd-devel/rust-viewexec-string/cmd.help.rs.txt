@@ -84,10 +84,14 @@ impl<'a> flood_tide::HelpVersion for SubCmdOptConf<'a> {
     }
 }
 
-fn value_to_radix_style(nv: &NameVal<'_>) -> Result<RadixStyle, OptParseError> {
+fn value_to_type<T>(nv: &NameVal<'_>) -> Result<T, OptParseError>
+where
+    T: std::str::FromStr,
+    <T as std::str::FromStr>::Err: std::fmt::Display,
+{
     match nv.val {
-        Some(s) => match FromStr::from_str(s) {
-            Ok(x) => Ok(x),
+        Some(x) => match x.parse::<T>() {
+            Ok(d) => Ok(d),
             Err(err) => Err(OptParseError::invalid_option_argument(
                 &nv.opt.lon_or_sho(),
                 &err.to_string(),

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * refactor `MetaType::as_type_string` to use `heck`
 * rename internal functions and structs to remove the `0` suffix
 * replace `unsafe { std::mem::transmute(value) }` with a safe `match` statement in generated code
+* consolidate multiple type-specific `value_to` functions into a single generic `value_to_type<T>` function in generated code
 
 ### Removed
 * unnecessary test file `tests/basic.rs`

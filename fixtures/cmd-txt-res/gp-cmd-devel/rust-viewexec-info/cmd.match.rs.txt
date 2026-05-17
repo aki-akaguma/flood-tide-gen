@@ -10,7 +10,7 @@ match CmdOp::from(nv.opt.num) {
         conf.flg_section_headers = true;
     }
     CmdOp::Tbl => {
-        conf.opt_tbl = value_to_string(nv)?;
+        conf.opt_tbl = value_to_type::<String>(nv)?;
     }
     CmdOp::Syms => {
         conf.flg_syms = true;
