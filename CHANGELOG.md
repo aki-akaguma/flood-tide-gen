@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * replace `unsafe { std::mem::transmute(value) }` with a safe `match` statement in generated code
 * consolidate multiple type-specific `value_to` functions into a single generic `value_to_type<T>` function in generated code
 * improve parsing robustness by replacing `unreachable!` and `eprintln!` with structured error returns using `anyhow`
+* rust-version: "1.68.0"
+* update crate: regex(1.12)
 
 ### Removed
 * unnecessary test file `tests/basic.rs`
