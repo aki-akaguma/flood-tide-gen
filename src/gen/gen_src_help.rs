@@ -13,7 +13,11 @@ pub fn gen_src_help(
     vec_line: &[String],
     out_flags: SrcHelpFlags,
 ) -> anyhow::Result<String> {
-    Ok(gen_src_help_internal(vec_optstr, vec_line, out_flags.into()))
+    Ok(gen_src_help_internal(
+        vec_optstr,
+        vec_line,
+        out_flags.into(),
+    ))
 }
 
 pub(crate) fn gen_src_help_internal(
@@ -108,6 +112,13 @@ enum CmdOp {
         sss.push_str_ary(&["    ", &rec.enum_s, ",\n"]);
     }
     *sss += "}\n";
+    *sss += r#"
+impl CmdOp {
+    pub const fn to(self) -> OptNum {
+        self as OptNum
+    }
+}
+"#;
     *sss += r#"
 impl std::convert::From<u8> for CmdOp {
     fn from(value: u8) -> Self {

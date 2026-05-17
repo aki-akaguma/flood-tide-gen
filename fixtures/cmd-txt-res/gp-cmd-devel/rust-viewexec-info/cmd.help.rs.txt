@@ -34,6 +34,12 @@ enum CmdOp {
     Version,
 }
 
+impl CmdOp {
+    pub const fn to(self) -> OptNum {
+        self as OptNum
+    }
+}
+
 impl std::convert::From<u8> for CmdOp {
     fn from(value: u8) -> Self {
         match value {
