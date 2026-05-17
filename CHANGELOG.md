@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * rename internal functions and structs to remove the `0` suffix
 * replace `unsafe { std::mem::transmute(value) }` with a safe `match` statement in generated code
 * consolidate multiple type-specific `value_to` functions into a single generic `value_to_type<T>` function in generated code
+* improve parsing robustness by replacing `unreachable!` and `eprintln!` with structured error returns using `anyhow`
 
 ### Removed
 * unnecessary test file `tests/basic.rs`

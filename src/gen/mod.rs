@@ -252,8 +252,7 @@ pub(crate) fn parse_input_file_internal(in_file: &str) -> anyhow::Result<(Vec<Op
                 ..OptStr::default()
             });
         } else {
-            eprintln!("LINE ERROR: {}", line);
-            unreachable!();
+            return Err(anyhow::anyhow!("parsing error: `{}`", line));
         }
         vec_line.push(line);
     }
